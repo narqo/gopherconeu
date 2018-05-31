@@ -5,5 +5,5 @@ ENV PORT=8000 \
 
 EXPOSE $PORT $HEALTH_PORT
 
-COPY BUILD/gophercon /
+COPY ./bin/linux-amd64/gophercon /
 CMD ["/gophercon"]
