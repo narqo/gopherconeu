@@ -2,21 +2,25 @@ package main
 
 import (
 	"log"
-	"net/http"
+	"net"
 	"os"
 
+	"github.com/narqo/gopherconeu/pkg/routing"
 	"github.com/narqo/gopherconeu/pkg/server"
 )
 
 func main() {
-	addr := os.Getenv("ADDR")
-	if addr == "" {
-		log.Fatal("ADDR wasn't set")
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("PORT is empty")
 	}
 
-	r := server.New()
+	r := routing.New()
+
+	addr := net.JoinHostPort("", port)
+	s := server.New(addr, r)
 
 	log.Printf("server is running: addr %s\n", addr)
 
-	log.Fatal(http.ListenAndServe(addr, r))
+	log.Fatal(s.Start())
 }

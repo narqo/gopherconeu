@@ -1,23 +1,18 @@
 package server
 
-import (
-	"fmt"
-	"net/http"
+import "net/http"
 
-	"github.com/gorilla/mux"
-)
-
-func New() http.Handler {
-	r := mux.NewRouter()
-
-	r.Handle("/home", homeHandler()).Methods(http.MethodGet)
-
-	return r
+type Server struct {
+	http.Server
 }
 
-func homeHandler() http.Handler {
-	h := func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, GopherCon EU")
-	}
-	return http.HandlerFunc(h)
+func New(addr string, handler http.Handler) *Server {
+	s := &Server{}
+	s.Addr = addr
+	s.Handler = handler
+	return s
+}
+
+func (s *Server) Start() error {
+	return s.ListenAndServe()
 }
