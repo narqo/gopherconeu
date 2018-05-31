@@ -1,6 +1,9 @@
 package server
 
-import "net/http"
+import (
+	"context"
+	"net/http"
+)
 
 type Server struct {
 	http.Server
@@ -15,4 +18,8 @@ func New(addr string, handler http.Handler) *Server {
 
 func (s *Server) Start() error {
 	return s.ListenAndServe()
+}
+
+func (s *Server) Stop(ctx context.Context) error {
+	return s.Shutdown(ctx)
 }
