@@ -26,9 +26,9 @@ build:
 	$(GO) build \
 		-o BUILD/$(APP) \
 		-ldflags '\
-			-X $(REPO)/version.Commit=$(GIT_SHA) \
-			-X $(REPO)/version.BuildTime=$(BUILD_TIME) \
-			-X $(REPO)/version.Version=$(VERSION)' \
+			-X $(REPO)/version.Version=$(VERSION) \
+			-X $(REPO)/version.Commit=$(GITSHA) \
+			-X $(REPO)/version.BuildTime=$(BUILD_TIME)' \
 		$(REPO)/cmd/$(APP)
 
 container: build
@@ -38,7 +38,7 @@ test:
 	$(GO) test ./...
 
 run:
-	PORT=$(PORT) HEATH_PORT=$(HEALTH_PORT) ./BUILD/$(APP)
+	PORT=$(PORT) HEALTH_PORT=$(HEALTH_PORT) ./BUILD/$(APP)
 
 clean:
 	$(RM) -r BUILD/

@@ -20,9 +20,9 @@ func main() {
 		log.Fatal("PORT is empty")
 	}
 
-	healthPort := os.Getenv("HEATH_PORT")
+	healthPort := os.Getenv("HEALTH_PORT")
 	if healthPort == "" {
-		log.Fatal("HEATH_PORT is empty")
+		log.Fatal("HEALTH_PORT is empty")
 	}
 
 	ctx, _ := context.WithCancel(context.Background())
