@@ -5,17 +5,34 @@ GO   ?= go
 #GOARCH ?= amd64
 
 APP := gophercon
+BUILD_TIME := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
+GITSHA := $(shell git rev-parse --short HEAD 2>/dev/null)
+
+ifndef VERSION
+	VERSION := git-$(GITSHA)
+endif
+
+PORT := 8000
+HEALTH_PORT := 8001
+
+SHELL=/bin/bash
 
 all: build
 
 build:
-	$(GO) build -o BUILD/$(APP) $(REPO)/cmd/$(APP)
+	$(GO) build \
+		-o BUILD/$(APP) \
+		-ldflags '\
+			-X $(REPO)/version.COMMIT=$(GIT_SHA) \
+			-X $(REPO)/version.BuildTime=$(BUILD_TIME) \
+			-X $(REPO)/version.Version=$(VERSION)' \
+		$(REPO)/cmd/$(APP)
 
 test:
 	$(GO) test ./...
 
 run:
-	PORT=$(PORT) ./BUILD/$(APP)
+	PORT=$(PORT) HEATH_PORT=$(HEALTH_PORT) ./BUILD/$(APP)
 
 clean:
 	$(RM) -r BUILD/
