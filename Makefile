@@ -4,7 +4,7 @@ GO     ?= go
 GOOS   ?= linux
 GOARCH ?= amd64
 
-APP := gophercon
+APP := gopherconeu
 BUILD_TIME := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
 GITSHA := $(shell git rev-parse --short HEAD 2>/dev/null)
 
