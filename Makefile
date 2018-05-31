@@ -26,7 +26,7 @@ build:
 	$(GO) build \
 		-o BUILD/$(APP) \
 		-ldflags '\
-			-X $(REPO)/version.COMMIT=$(GIT_SHA) \
+			-X $(REPO)/version.Commit=$(GIT_SHA) \
 			-X $(REPO)/version.BuildTime=$(BUILD_TIME) \
 			-X $(REPO)/version.Version=$(VERSION)' \
 		$(REPO)/cmd/$(APP)
