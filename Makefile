@@ -1,7 +1,7 @@
 REPO := github.com/narqo/gopherconeu
 
-GO   ?= go
-GOOS ?= linux
+GO     ?= go
+GOOS   ?= linux
 GOARCH ?= amd64
 
 APP := gophercon
@@ -24,12 +24,12 @@ all: build
 build:
 	CGO_ENABLED=0 GOOS=${GOOS} GOARCH=${GOARCH} \
 	$(GO) build \
-		-o BUILD/$(APP) \
+		-o bin/${GOOS}-${GOARCH}/${APP} \
 		-ldflags '\
 			-X $(REPO)/version.Version=$(VERSION) \
 			-X $(REPO)/version.Commit=$(GITSHA) \
 			-X $(REPO)/version.BuildTime=$(BUILD_TIME)' \
-		$(REPO)/cmd/$(APP)
+		$(REPO)/cmd
 
 container: build
 	docker build -t $(CONTAINER_IMAGE):$(VERSION) .
