@@ -14,5 +14,5 @@ func main() {
 
 	log.Printf("server is running: addr %s\n", addr)
 
-	http.ListenAndServe(addr, r)
+	log.Fatal(http.ListenAndServe(addr, r))
 }
