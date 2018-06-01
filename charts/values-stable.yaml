@@ -35,8 +35,8 @@ image:
   ## Docker Registry/Hub image name and tag
   ##
   registry: docker.io/k8sc
-  name: rumyantseva-gophercon
-  tag: 0.0.1
+  name: narqo-gopherconeu
+  tag: 0.0.2
 
   ## Docker Registry/Hub image pull policy
   ##
@@ -77,7 +77,7 @@ ingress:
 service:
   ## App container name
   ##
-  name: gophercon
+  name: gopherconeu
   
   ## Service Type
   ## For minikube, set this to NodePort, elsewhere use ClusterIP

@@ -5,5 +5,5 @@ ENV PORT=8000 \
 
 EXPOSE $PORT $HEALTH_PORT
 
-COPY ./bin/linux-amd64/gopherconeu /
+COPY bin/linux-amd64/gopherconeu /
 CMD ["/gopherconeu"]
